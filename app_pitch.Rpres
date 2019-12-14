@@ -1,0 +1,49 @@
+Solving clustering problem for iris data set with R-Shiny application
+========================================================
+author: Mykyta Zharov
+date: 14/12/2019
+autosize: true
+
+Owerview
+========================================================
+
+Using R we can easily solve different clustering problems.
+There are different clustering algorithms and it is essentially
+to try different algorithms before stating the results. 
+As an example the R Shiny apllication was built,
+that solves clustering problem for the iris data set,
+using the following algorithms:
+
+- K-means clustering algorithm
+- Model-based clustering algorithm using Gaussian distributions
+- K-medoids clustering
+
+Links to the R Shiny Application and Git-hub repo
+========================================================
+
+- R Shiny application: https://mykytazharov.shinyapps.io/KMeansVisualisation/
+- Git-hub repo incluiding ui.R and server.R for the application and presnetation: https://github.com/mykytazharov/RShinyApplication 
+
+Application usage
+========================================================
+
+In the application there are several inpus, which a user can change.
+
+- In the first dropdown menu a user can choose a clustering method to be used.
+- Using a slider, a user can select a number of desired clusters.
+- Using two dropdown menus at the end, a user can select 2 variables that will describe the data points.
+
+Output Example
+========================================================
+
+After selecting desired inputs, a user can observe the visual
+result of solving a clustering problem on the plot. For example, for K-means clustering and 3 clusters for variables Sepal.Length and Sepal.Width a user will see the following output:
+```{r fig, echo=FALSE, fig.height = 5, fig.width = 5, fig.align = "center"}
+library(ggplot2)
+data<- iris[, 1:2]
+x <- as.name(names(data)[1]) 
+y <- as.name(names(data)[2]) 
+cl <- kmeans(data, centers=3)
+ggplot(data, aes_q(x=x,y=y, col=factor(cl$cluster)), environment = environment()) +  geom_point()+ labs(color='Clusters')
+```
+
